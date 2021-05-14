@@ -1,13 +1,23 @@
+<script>
+import { mapState, mapActions } from "vuex";
+export default {
+  computed: {
+    ...mapState(["user"]),
+  },
+  methods: {
+    ...mapActions(["logout"]),
+  },
+};
+</script>
+
 <template lang="pug">
   section#home
-      a-result(title="Hoşgeldin! Seni gördüğüme sevindim🎉" subTitle="Yapılacak bir listen mi var? Hemen unutmadan siteye ekle.")
+      a-result(title="Welcome! glad to see you🎉" subTitle="Do you have a list to do? Add it right away.")
         template(slot="icon")
           a-icon(type="smile" theme="twoTone")
         template(slot="extra")
-          a-button(type="primary" @click="$router.push({path:'/dashboard'})") Sayfamı Görüntüle
-          a-button(to="register" @click="$router.push({path:'/register'})") Hemen Kayıt Ol!
+          a-button(v-if="user" type="primary" @click="$router.push({path:'/dashboard'})") My Dashboard
+          a-button(v-if="user" @click="logout()") Logout
+          a-button(v-if="!user" type="primary" to="register" @click="$router.push({path:'/register'})") Now Register
+          a-button(v-if="!user"  to="register" @click="$router.push({path:'/login'})") Login
 </template>
-
-<script>
-export default {};
-</script>
