@@ -86,7 +86,7 @@ export default {
               this.$router.push({ path: "/login" });
             }, 2 * 1000);
           } catch (error) {
-            notification.success({
+            notification.error({
               message: error.message,
               duration: 0,
               key: 1,

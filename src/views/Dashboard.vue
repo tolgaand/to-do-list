@@ -63,7 +63,7 @@ export default {
         await this.deleteWork(id);
         message.success("Work deleted successfully");
       } catch (error) {
-        message.error(err.message);
+        message.error(error.message);
       } finally {
         setTimeout(loading, 1);
       }
@@ -74,7 +74,7 @@ export default {
         await this.updateWork(id);
         message.success("Work updated successfully");
       } catch (error) {
-        message.error(err.message);
+        message.error(error.message);
       } finally {
         setTimeout(loading, 1);
       }
