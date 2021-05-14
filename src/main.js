@@ -24,6 +24,8 @@ import {
   Empty,
   Tabs,
   Result,
+  notification,
+  DatePicker,
 } from "ant-design-vue";
 
 const components = [
@@ -45,14 +47,20 @@ const components = [
   Empty,
   Tabs,
   Result,
+  DatePicker,
 ];
 
 components.forEach((c) => Vue.use(c));
 
 Vue.config.productionTip = false;
+Vue.prototype.$notification = notification;
 
-new Vue({
-  router,
-  store,
-  render: (h) => h(App),
-}).$mount("#app");
+async function main() {
+  const storeInstance = await store();
+  new Vue({
+    store: storeInstance,
+    router: router(storeInstance),
+    render: (h) => h(App),
+  }).$mount("#app");
+}
+main();
