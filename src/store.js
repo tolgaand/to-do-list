@@ -27,12 +27,12 @@ const store = new Vuex.Store({
   },
   mutations: {
     [mutations.SET_USER](state, value) {
-      this.state.user = value;
+      state.user = value;
     },
   },
   actions: {
     async [actions.INIT_USER]({ commit }) {
-      return new Promise((resolve, reject) => {
+      return new Promise((resolve) => {
         firebase.auth().onAuthStateChanged((user) => {
           if (user)
             commit("setUser", {
@@ -44,7 +44,7 @@ const store = new Vuex.Store({
         });
       });
     },
-    async [actions.REGISTER]({}, user) {
+    async [actions.REGISTER](context, user) {
       const created = await firebase
         .auth()
         .createUserWithEmailAndPassword(user.email, user.password);
